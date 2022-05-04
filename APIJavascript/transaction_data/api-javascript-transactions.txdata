@@ -1,0 +1,44 @@
+[
+    {
+        "transactionName": "apiJavascriptExists",
+        "transactionLabel": "A test apiJavascriptExists transaction",
+        "arguments": [
+            "001"
+        ],
+        "transientData": {}
+    },
+    {
+        "transactionName": "createApiJavascript",
+        "transactionLabel": "A test createApiJavascript transaction",
+        "arguments": [
+            "001",
+            "some value"
+        ],
+        "transientData": {}
+    },
+    {
+        "transactionName": "readApiJavascript",
+        "transactionLabel": "A test readApiJavascript transaction",
+        "arguments": [
+            "001"
+        ],
+        "transientData": {}
+    },
+    {
+        "transactionName": "updateApiJavascript",
+        "transactionLabel": "A test updateApiJavascript transaction",
+        "arguments": [
+            "001",
+            "some other value"
+        ],
+        "transientData": {}
+    },
+    {
+        "transactionName": "deleteApiJavascript",
+        "transactionLabel": "A test deleteApiJavascript transaction",
+        "arguments": [
+            "001"
+        ],
+        "transientData": {}
+    }
+]
