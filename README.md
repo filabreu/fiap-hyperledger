@@ -33,20 +33,18 @@ A estrutura de diretórios é
      }
 
 # Como rodar 
-Baixar o projeto para a máquina com o comando
-git clone https://github.com/gsreis/blockchain.git
-
-Abrir o VSCODE e importar o projeto a partir de um arquivo (utilizar o arquivo Workspace)
-Levantar o servidor hyperledger 
-Empacotar o contrato 
-Publicar o pacote no canal 
-Chamar os métodos do CRUD para testar
-Exportar a configuração com o nome config.json
-Exportar o wallet com o nome wallet
-Abrir uma linha de comando no diretório clientCode e digitar npm install (ou sudo npm install)
-levantar o servidor com node index.js
-Abrir um browser e digitar localhost:3546
-Deve aparecer uma pagina HTLM que permite navegar pelo CRUD
+- Baixar o projeto para a máquina com o comando "git clone https://github.com/gsreis/blockchain.git"
+- Abrir o VSCODE e importar o projeto a partir de um arquivo (utilizar o arquivo Workspace) 
+- Levantar o servidor hyperledger 
+- Empacotar o contrato 
+- Publicar o pacote no canal 
+- Chamar os métodos do CRUD para testar
+- Exportar a configuração com o nome connection.json
+- Exportar o wallet com o nome de diretório wallet
+- Abrir uma linha de comando no diretório clientCode e digitar "npm install" (ou "sudo npm install")
+- levantar o servidor com o comando "node index.js"
+- Abrir um browser e digitar "localhost:3546"
+- Deve aparecer uma pagina HTLM que permite navegar pelo CRUD
 
 ## Atividades 
 Criar uma calculadora, com as operações básicas, e apresentar na lateral as operações efetuadas
