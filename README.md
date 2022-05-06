@@ -5,8 +5,8 @@ Este repositório foi criado para aulas ministradas sobre criação de Smart Con
 A estrutura de diretórios é 
 
 # APIJava
-Contrato criado em Java, com vários métodos
-Dentro está implementado um CRUD, e os métodos
+### Contrato criado em Java, com vários métodos
+### Dentro está implementado um CRUD, e os métodos
 
 ## getStateByRange
     Pode-se passar a chave inicial e final de busca (não está impementado no HTML)
