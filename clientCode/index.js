@@ -1,20 +1,63 @@
 // content of index.js
 const http = require('http')
 const contract = require('./invoke.js')
+const express = require("express");
+const bodyParser = require("body-parser");
+const fileUpload = require('express-fileupload');
+const cors = require('cors');
+const morgan = require('morgan');
+const _ = require('lodash');
+const path = require('path');
 
-const port = 3000
+const port = 3546
 
-const requestHandler = (request, response) => {
-  console.log(request.url)
-  contract.main()
-  response.end('Hello Node.js Server!')
-}
+// async function main() {
+//   contract.create("0008", "00008")
+// }
+main();
 
-const server = http.createServer(requestHandler)
 
-server.listen(port, (err) => {
-  if (err) {
-    return console.log('erro', err)
-  }
-  console.log(`server is listening on ${port}`)
+async function main() {
+
+app = express();
+
+app.use(express.json())
+app.use(fileUpload({
+    createParentPath: true
+}));
+app.use(cors());
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({extended: true}));
+app.use(morgan('dev'))
+app.use(express.static('static'));
+app.use('/', express.static("static"))
+
+app.get("/create", async (req, res) => {
+   ret = await contract.create(req.query.chave, req.query.valor);
+   console.log(ret);
+   res.send(ret);
 })
+
+app.get("/update", async (req, res) => {
+   ret = await contract.update(req.query.chave, req.query.valor);
+   console.log(ret);
+   res.send(ret);
+})
+
+app.get("/retrieve", async (req, res) => {     
+   ret = await contract.retrieve(req.query.chave);     
+   console.log(ret);   
+   res.send(ret);
+})
+
+app.get("/delete", async (req, res) => {     
+   ret = await contract.delete(req.query.chave);
+   console.log(ret);
+   res.send(ret);
+})
+
+app.listen(port, function(err) {
+   console.log("Servidor rodando na porta" + port);
+})
+
+}

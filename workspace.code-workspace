@@ -7,10 +7,6 @@
 			"path": "APIJava"
 		},
 		{
-			"name": "APIGo",
-			"path": "APIGo"
-		},
-		{
 			"name": "APIJavascript",
 			"path": "APIJavascript"
 		}

@@ -40,7 +40,7 @@ public class ApiJavaContract implements ContractInterface {
     }
 
     @Transaction()
-    public void createSampleApiCtx(Context ctx, String sampleApiCtxId, String value) {
+    public void create(Context ctx, String sampleApiCtxId, String value) {
         boolean exists = apiJavaExists(ctx,sampleApiCtxId);
         if (exists) {
             throw new RuntimeException("The asset "+sampleApiCtxId+" already exists");
@@ -49,7 +49,7 @@ public class ApiJavaContract implements ContractInterface {
     }
 
     @Transaction()
-    public String readSampleApiCtx(Context ctx, String sampleApiCtxId) {
+    public String retrieve(Context ctx, String sampleApiCtxId) {
         boolean exists = apiJavaExists(ctx,sampleApiCtxId);
         if (!exists) {
             throw new RuntimeException("The asset "+sampleApiCtxId+" does not exist");
@@ -59,7 +59,7 @@ public class ApiJavaContract implements ContractInterface {
     }
 
     @Transaction()
-    public void updateSampleApiCtx(Context ctx, String sampleApiCtxId, String newValue) {
+    public void update(Context ctx, String sampleApiCtxId, String newValue) {
         boolean exists = apiJavaExists(ctx,sampleApiCtxId);
         if (!exists) {
             throw new RuntimeException("The asset "+sampleApiCtxId+" does not exist");
@@ -68,7 +68,7 @@ public class ApiJavaContract implements ContractInterface {
     }
 
     @Transaction()
-    public void deleteSampleApiCtx(Context ctx, String sampleApiCtxId) {
+    public void delete(Context ctx, String sampleApiCtxId) {
         boolean exists = apiJavaExists(ctx,sampleApiCtxId);
         if (!exists) {
             throw new RuntimeException("The asset "+sampleApiCtxId+" does not exist");

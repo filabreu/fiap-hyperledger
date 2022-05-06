@@ -21,12 +21,6 @@
    const wallet = await Wallets.newFileSystemWallet(walletPath);
    console.log(`Wallet path: ${walletPath}`);
 
-   // Check to see if we've already enrolled the admin user.
-  //  const userExists = await wallet.exists('novousuario');
-  //  if (userExists) {
-  //    console.log('An identity for "novousuario" already exists in the wallet');
-  //    return;
-  // }
 
    // Enroll the admin user, and import the new identity into the wallet.
    const enrollment = await ca.enroll({ enrollmentID: 'admin', enrollmentSecret: 'adminpw' });

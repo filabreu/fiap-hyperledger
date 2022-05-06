@@ -81,7 +81,7 @@ public final class ApiJavaContractTest {
 
             String json = "{\"value\":\"TheApiJava\"}";
 
-            contract.createSampleApiCtx(ctx, "10001", "TheApiJava");
+            contract.create(ctx, "10001", "TheApiJava");
 
             verify(stub).putState("10001", json.getBytes(UTF_8));
         }
@@ -96,7 +96,7 @@ public final class ApiJavaContractTest {
             when(stub.getState("10002")).thenReturn(new byte[] { 42 });
 
             Exception thrown = assertThrows(RuntimeException.class, () -> {
-                contract.createSampleApiCtx(ctx, "10002", "TheApiJava");
+                contract.create(ctx, "10002", "TheApiJava");
             });
 
             assertEquals(thrown.getMessage(), "The asset 10002 already exists");
@@ -118,7 +118,7 @@ public final class ApiJavaContractTest {
         String json = asset.toJSONString();
         when(stub.getState("10001")).thenReturn(json.getBytes(StandardCharsets.UTF_8));
 
-        String returnedAsset = contract.readSampleApiCtx(ctx, "10001");
+        String returnedAsset = contract.retrieve(ctx, "10001");
         assertEquals(returnedAsset, asset.getValue());
     }
 
@@ -132,7 +132,7 @@ public final class ApiJavaContractTest {
             when(ctx.getStub()).thenReturn(stub);
             when(stub.getState("10001")).thenReturn(new byte[] { 42 });
 
-            contract.updateSampleApiCtx(ctx, "10001", "updates");
+            contract.update(ctx, "10001", "updates");
 
             String json = "{\"value\":\"updates\"}";
             verify(stub).putState("10001", json.getBytes(UTF_8));
@@ -148,7 +148,7 @@ public final class ApiJavaContractTest {
             when(stub.getState("10001")).thenReturn(null);
 
             Exception thrown = assertThrows(RuntimeException.class, () -> {
-                contract.updateSampleApiCtx(ctx, "10001", "TheApiJava");
+                contract.update(ctx, "10001", "TheApiJava");
             });
 
             assertEquals(thrown.getMessage(), "The asset 10001 does not exist");
@@ -165,7 +165,7 @@ public final class ApiJavaContractTest {
         when(stub.getState("10001")).thenReturn(null);
 
         Exception thrown = assertThrows(RuntimeException.class, () -> {
-            contract.deleteSampleApiCtx(ctx, "10001");
+            contract.delete(ctx, "10001");
         });
 
         assertEquals(thrown.getMessage(), "The asset 10001 does not exist");
