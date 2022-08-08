@@ -12,9 +12,9 @@ export default function Home() {
 
       <main>
         <section>
-          <Image src="/nova.svg" alt="nebula" />
-          <Image src="/thanos.svg" alt="nebula" />
-          <Image src="/nebula.svg" alt="nebula" />
+          <Image src="/arium_nova.svg" alt="nova" width="244" height="300" />
+          <Image src="/arium_thanos.svg" alt="thanos" width="244" height="300" />
+          <Image src="/arium_nebula.svg" alt="nebula" width="244" height="300" />
         </section>
       </main>
     </div>
