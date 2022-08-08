@@ -9,6 +9,12 @@
 		{
 			"name": "APIJavascript",
 			"path": "APIJavascript"
+		},
+		{
+			"path": "car-builder"
+		},
+		{
+			"path": "next-car-builder"
 		}
 	],
 	"settings": {}

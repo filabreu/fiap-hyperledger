@@ -8,13 +8,13 @@ const { Contract } = require('fabric-contract-api');
 
 class ApiJavascriptContract extends Contract {
 
-    async apiJavascriptExists(ctx, apiJavascriptId) {
+    async exists(ctx, apiJavascriptId) {
         const buffer = await ctx.stub.getState(apiJavascriptId);
         return (!!buffer && buffer.length > 0);
     }
 
-    async createApiJavascript(ctx, apiJavascriptId, value) {
-        const exists = await this.apiJavascriptExists(ctx, apiJavascriptId);
+    async create(ctx, apiJavascriptId, value) {
+        const exists = await this.exists(ctx, apiJavascriptId);
         if (exists) {
             throw new Error(`The api javascript ${apiJavascriptId} already exists`);
         }
@@ -23,8 +23,8 @@ class ApiJavascriptContract extends Contract {
         await ctx.stub.putState(apiJavascriptId, buffer);
     }
 
-    async readApiJavascript(ctx, apiJavascriptId) {
-        const exists = await this.apiJavascriptExists(ctx, apiJavascriptId);
+    async retrieve(ctx, apiJavascriptId) {
+        const exists = await this.exists(ctx, apiJavascriptId);
         if (!exists) {
             throw new Error(`The api javascript ${apiJavascriptId} does not exist`);
         }
@@ -33,8 +33,8 @@ class ApiJavascriptContract extends Contract {
         return asset;
     }
 
-    async updateApiJavascript(ctx, apiJavascriptId, newValue) {
-        const exists = await this.apiJavascriptExists(ctx, apiJavascriptId);
+    async update(ctx, apiJavascriptId, newValue) {
+        const exists = await this.exists(ctx, apiJavascriptId);
         if (!exists) {
             throw new Error(`The api javascript ${apiJavascriptId} does not exist`);
         }
@@ -43,8 +43,8 @@ class ApiJavascriptContract extends Contract {
         await ctx.stub.putState(apiJavascriptId, buffer);
     }
 
-    async deleteApiJavascript(ctx, apiJavascriptId) {
-        const exists = await this.apiJavascriptExists(ctx, apiJavascriptId);
+    async destroy(ctx, apiJavascriptId) {
+        const exists = await this.exists(ctx, apiJavascriptId);
         if (!exists) {
             throw new Error(`The api javascript ${apiJavascriptId} does not exist`);
         }
