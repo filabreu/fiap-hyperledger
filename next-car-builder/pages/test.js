@@ -72,30 +72,60 @@ export default function Test() {
       </Head>
 
       <div>
-        <form onSubmit={handleRetrieveSubmit}>
-          <label>Retrieve</label>
-          <input placeholder="key" value={retrieveKey} onChange={e => setRetrieveKey(e.currentTarget.value)} />
-          <input value="ok" type="submit" />
+        <form className="px-10 py-5" onSubmit={handleRetrieveSubmit}>
+          <label className="mr-4">Retrieve</label>
+          <input
+            className="mr-4 px-2 py-1 border border-black"
+            placeholder="key"
+            value={retrieveKey}
+            onChange={e => setRetrieveKey(e.currentTarget.value)}
+          />
+          <input className="px-6 py-1 border border-black" value="ok" type="submit" />
         </form>
 
-        <form onSubmit={handleCreateSubmit}>
-          <label>Create</label>
-          <input placeholder="key" value={createKey} onChange={e => setCreateKey(e.currentTarget.value)} />
-          <input placeholder="value" value={createValue} onChange={e => setCreateValue(e.currentTarget.value)} />
-          <input value="ok" type="submit" />
+        <form className="px-10 py-5" onSubmit={handleCreateSubmit}>
+          <label className="mr-4">Create</label>
+          <input
+            className="mr-4 px-2 py-1 border border-black"
+            placeholder="key"
+            value={createKey}
+            onChange={e => setCreateKey(e.currentTarget.value)}
+          />
+          <input
+            className="mr-4 px-2 py-1 border border-black"
+            placeholder="value"
+            value={createValue}
+            onChange={e => setCreateValue(e.currentTarget.value)}
+          />
+          <input className="px-6 py-1 border border-black" value="ok" type="submit" />
         </form>
 
-        <form onSubmit={handleUpdateSubmit}>
-          <label>Update</label>
-          <input placeholder="key" value={updateKey} onChange={e => setUpdateKey(e.currentTarget.value)} />
-          <input placeholder="value" value={updateValue} onChange={e => setUpdateValue(e.currentTarget.value)} />
-          <input value="ok" type="submit" />
+        <form className="px-10 py-5" onSubmit={handleUpdateSubmit}>
+          <label className="mr-4">Update</label>
+          <input
+            className="mr-4 px-2 py-1 border border-black"
+            placeholder="key"
+            value={updateKey}
+            onChange={e => setUpdateKey(e.currentTarget.value)}
+          />
+          <input
+            className="mr-4 px-2 py-1 border border-black"
+            placeholder="value"
+            value={updateValue}
+            onChange={e => setUpdateValue(e.currentTarget.value)}
+          />
+          <input className="px-6 py-1 border border-black" value="ok" type="submit" />
         </form>
 
-        <form onSubmit={handleDestroySubmit}>
-          <label>Destroy</label>
-          <input placeholder="key" value={destroyKey} onChange={e => setDestroyKey(e.currentTarget.value)} />
-          <input value="ok" type="submit" />
+        <form className="px-10 py-5" onSubmit={handleDestroySubmit}>
+          <label className="mr-4">Destroy</label>
+          <input
+            className="mr-4 px-2 py-1 border border-black"
+            placeholder="key"
+            value={destroyKey}
+            onChange={e => setDestroyKey(e.currentTarget.value)}
+          />
+          <input className="px-6 py-1 border border-black" value="ok" type="submit" />
         </form>
       </div>
     </div>
