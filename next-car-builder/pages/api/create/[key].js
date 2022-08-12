@@ -1,8 +1,10 @@
 // Next.js API route support: https://nextjs.org/docs/api-routes/introduction
-import { create } from '../../../blockchain/invoke'
+import { create, retrieve } from '../../../blockchain/invoke'
 
 export default async function handler(req, res) {
-  const block = await create(req.query.key, JSON.parse(req.body).value)
+  await create(req.query.key, req.body)
+
+  const block = await retrieve(req.query.key)
 
   console.log(block)
 

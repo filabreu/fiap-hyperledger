@@ -1,7 +1,39 @@
+import { useState, useMemo } from 'react'
 import Head from 'next/head'
 import Image from 'next/image'
 
+const Selectable = ({ selected, children, ...props }) => (
+  <div
+    className={`border-4 text-[0px] cursor-pointer ${selected ? 'border-slate-400' : ''}`}
+    {...props}
+  >
+    {children}
+  </div>
+)
+
 export default function Home() {
+  const [model, setModel] = useState()
+  const [leatherColor, setLeatherColor] = useState()
+  const [paintColor, setPaintColor] = useState()
+  const [carIsBuilt, setCarIsBuilt] = useState(false)
+
+  const timestamp = useMemo(() => Math.ceil(Date.now() / 1000), [])
+
+  console.log(timestamp)
+
+  const handleCarBuild = () => {
+    fetch(`/api/create/${timestamp}`, {
+      method: 'post',
+      body: JSON.stringify({
+        model,
+        leatherColor,
+        paintColor
+      }),
+    })
+      .then((response) => response.json())
+      .then((data) => setCarIsBuilt(true))
+  }
+
   return (
     <div>
       <Head>
@@ -11,11 +43,81 @@ export default function Home() {
       </Head>
 
       <main>
-        <section>
-          <Image src="/arium_nova.svg" alt="nova" width="244" height="300" />
-          <Image src="/arium_thanos.svg" alt="thanos" width="244" height="300" />
-          <Image src="/arium_nebula.svg" alt="nebula" width="244" height="300" />
+        <section className="mb-12">
+          <h3 className="mb-4 text-2xl font-bold text-center">Select a model</h3>
+          <div className="flex space-x-8 justify-center">
+            <Selectable selected={model === 'nova'} onClick={() => setModel('nova')}>
+              <Image src="/arium_nova.svg" alt="nova" width="244" height="300" />
+            </Selectable>
+            <Selectable selected={model === 'thanos'} onClick={() => setModel('thanos')}>
+              <Image src="/arium_thanos.svg" alt="thanos" width="244" height="300" />
+            </Selectable>
+            <Selectable selected={model === 'nebula'} onClick={() => setModel('nebula')}>
+              <Image src="/arium_nebula.svg" alt="nebula" width="244" height="300" />
+            </Selectable>
+          </div>
         </section>
+
+        <section className="mb-12">
+          <h3 className="mb-4 text-2xl font-bold text-center">Choose a leather color</h3>
+          <div className="flex space-x-8 justify-center">
+            <Selectable selected={leatherColor === 'brown'} onClick={() => setLeatherColor('brown')}>
+              <Image src="/brown_leather.jpg" alt="brown leather" width="200" height="200" />
+            </Selectable>
+            <Selectable selected={leatherColor === 'grey'} onClick={() => setLeatherColor('grey')}>
+              <Image src="/grey_leather.jpg" alt="grey leather" width="200" height="200" />
+            </Selectable>
+            <Selectable selected={leatherColor === 'red'} onClick={() => setLeatherColor('red')}>
+              <Image src="/red_leather.jpg" alt="red leather" width="200" height="200" />
+            </Selectable>
+            <Selectable selected={leatherColor === 'white'} onClick={() => setLeatherColor('white')}>
+              <Image src="/white_leather.jpg" alt="white leather" width="200" height="200" />
+            </Selectable>
+          </div>
+        </section>
+
+        <section className="mb-12">
+          <h3 className="mb-4 text-2xl font-bold text-center">Choose a paint color</h3>
+          <div className="flex space-x-8 justify-center">
+            <Selectable selected={paintColor === 'blue'} onClick={() => setPaintColor('blue')}>
+              <Image src="/azul.png" alt="blue" width="135" height="168" />
+            </Selectable>
+            <Selectable selected={paintColor === 'orange'} onClick={() => setPaintColor('orange')}>
+              <Image src="/laranja.png" alt="orange" width="135" height="168" />
+            </Selectable>
+            <Selectable selected={paintColor === 'purple'} onClick={() => setPaintColor('purple')}>
+              <Image src="/roxo.png" alt="purple" width="135" height="168" />
+            </Selectable>
+            <Selectable selected={paintColor === 'green'} onClick={() => setPaintColor('green')}>
+              <Image src="/verde.png" alt="green" width="135" height="168" />
+            </Selectable>
+            <Selectable selected={paintColor === 'red'} onClick={() => setPaintColor('red')}>
+              <Image src="/vermelho.png" alt="red" width="135" height="168" />
+            </Selectable>
+          </div>
+        </section>
+
+        {model && leatherColor && paintColor && (
+          <div className="mb-12 text-center">
+            <button
+              className="px-12 py-3 text-xl font-bold bg-sky-500 text-white"
+              onClick={handleCarBuild}
+            >
+              Build car
+            </button>
+          </div>
+        )}
+
+        {carIsBuilt && (
+          <div className="mb-12 text-center">
+            <button
+              className="px-12 py-3 text-xl font-bold bg-sky-500 text-white"
+              onClick={handleCarBuild}
+            >
+              Add insurance
+            </button>
+          </div>
+        )}
       </main>
     </div>
   )
