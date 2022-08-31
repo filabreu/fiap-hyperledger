@@ -18,7 +18,7 @@ class ApiJavascriptContract extends Contract {
         if (exists) {
             throw new Error(`The api javascript ${apiJavascriptId} already exists`);
         }
-        const asset = { value };
+        const asset = value;
         const buffer = Buffer.from(JSON.stringify(asset));
         await ctx.stub.putState(apiJavascriptId, buffer);
     }
@@ -38,7 +38,7 @@ class ApiJavascriptContract extends Contract {
         if (!exists) {
             throw new Error(`The api javascript ${apiJavascriptId} does not exist`);
         }
-        const asset = { value: newValue };
+        const asset = newValue;
         const buffer = Buffer.from(JSON.stringify(asset));
         await ctx.stub.putState(apiJavascriptId, buffer);
     }

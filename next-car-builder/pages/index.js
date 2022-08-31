@@ -1,6 +1,8 @@
-import { useState, useMemo } from 'react'
+import { useCallback, useEffect, useState } from 'react'
 import Head from 'next/head'
 import Image from 'next/image'
+
+import { get, post } from '../utils/http'
 
 const Selectable = ({ selected, children, ...props }) => (
   <div
@@ -12,27 +14,59 @@ const Selectable = ({ selected, children, ...props }) => (
 )
 
 export default function Home() {
+  const [carKey, setCarKey] = useState()
   const [model, setModel] = useState()
   const [leatherColor, setLeatherColor] = useState()
   const [paintColor, setPaintColor] = useState()
   const [carIsBuilt, setCarIsBuilt] = useState(false)
 
-  const timestamp = useMemo(() => Math.ceil(Date.now() / 1000), [])
+  console.log('carKey', carKey)
 
-  console.log(timestamp)
+  const createCar = () => post(
+    `/api/create/${carKey}`,
+    {
+      model,
+      leatherColor,
+      paintColor
+    }
+  )
+
+  const retrieveCar = () => get(`/api/retrieve/${carKey}`)
+  const keyExists = (key) => get(`/api/exists/${key}`)
+
+  const checkCarIsBuilt = () => {
+    setTimeout(() => {
+      retrieveCar()
+        .then(car => {
+          if (car.isManufactured) {
+            setCarIsBuilt(true)
+          } else {
+            checkCarIsBuilt()
+          }
+        })
+    }, 5000)
+  }
 
   const handleCarBuild = () => {
-    fetch(`/api/create/${timestamp}`, {
-      method: 'post',
-      body: JSON.stringify({
-        model,
-        leatherColor,
-        paintColor
-      }),
-    })
-      .then((response) => response.json())
-      .then((data) => setCarIsBuilt(true))
+    createCar()
+      .then(() => retrieveCar())
+      .then(() => checkCarIsBuilt())
+      .catch(err => console.error(err))
   }
+
+  const getAvailableKey = useCallback((key = 1) => {
+    console.log("getAvailableKey", key)
+    keyExists(key)
+      .then(() => {
+        if (key < 10)
+          getAvailableKey(key + 1)
+      })
+      .catch(() => setCarKey(key))
+  }, [])
+
+  useEffect(() => {
+    getAvailableKey()
+  }, [getAvailableKey])
 
   return (
     <div>
