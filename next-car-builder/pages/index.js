@@ -58,8 +58,7 @@ export default function Home() {
     console.log("getAvailableKey", key)
     keyExists(key)
       .then(() => {
-        if (key < 10)
-          getAvailableKey(key + 1)
+        getAvailableKey(key + 1)
       })
       .catch(() => setCarKey(key))
   }, [])
